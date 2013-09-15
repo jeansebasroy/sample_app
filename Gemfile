@@ -13,6 +13,10 @@ gem 'bootstrap-will_paginate', '0.0.9'
 group :development, :test do
 	gem 'sqlite3', '1.3.7'
 	gem 'rspec-rails', '2.13.1'
+	# gem 'guard-rspec', '2.5.0'
+  	# gem 'spork-rails', github: 'sporkrb/spork-rails'
+  	# gem 'guard-spork', '1.5.0'
+  	# gem 'childprocess', '0.3.6'
 end
 
 group :test do
@@ -21,6 +25,11 @@ group :test do
 	gem 'factory_girl_rails', '4.2.1'
 	gem 'cucumber-rails', '1.4.0', :require => false
 	gem 'database_cleaner', github: 'bmabey/database_cleaner'
+
+  	# Uncomment these lines on Windows.
+  	# gem 'rb-notifu', '0.0.4'
+  	# gem 'win32console', '1.3.2'
+  	# gem 'wdm', '0.1.0'
 end
 
 # Use SCSS for stylesheets

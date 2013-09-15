@@ -15,10 +15,14 @@ describe "Authentication" do
 		before { visit signin_path }
 
 		describe "with invalid information" do
+			let(:user) { FactoryGirl.create(:user) }
 			before { click_button "Sign in" }
 
 			it { should have_title('Sign in') }
 			it { should have_selector('div.alert.alert-error', text: 'Invalid') }
+
+			it { should_not have_link('Profile', 		href: user_path(user)) }
+			it { should_not have_link('Settings',		href: edit_user_path(user)) }
 
 			describe "after visiting another page" do
 				before { click_link "Home" }
@@ -29,12 +33,6 @@ describe "Authentication" do
 		describe "with valid information" do
 			let(:user) { FactoryGirl.create(:user) }
 			before { sign_in user }
-
-#			before do
-#				fill_in "Email", 	with: user.email.upcase
-#				fill_in "Password",	with: user.password
-#				click_button "Sign in"
-#			end
 
 			it { should have_title(user.name) }
 			it { should have_link('Users',			href: users_path) }
@@ -55,11 +53,10 @@ describe "Authentication" do
 			let(:user) { FactoryGirl.create(:user) }
 
 			describe "when attempting to visit a protected page" do
+	
 				before do
 					visit edit_user_path(user)
-					fill_in "Email", 	with: user.email
-					fill_in "Password", with: user.password
-					click_button "Sign in"
+					sign_in user
 				end
 
 				describe "after signing in" do
